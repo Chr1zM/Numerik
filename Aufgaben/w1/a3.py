@@ -6,7 +6,6 @@ def rechteckSum(f, a, b, n):
     return h * sum(f(a + i * h) for i in range(n))
 
 
-# komische Werte bei Trapezregel..
 def trapezregel(f, a, b, n):
     h = (b - a) / n
     return h / 2 * (f(a) + 2 * sum(f(a + i * h) for i in range(1, n)) + f(b))
