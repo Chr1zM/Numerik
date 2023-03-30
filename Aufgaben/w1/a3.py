@@ -12,6 +12,7 @@ def trapezregel(f, a, b, n):
     h = (b - a) / n
     return h / 2 * (f(a) + 2 * sum(f(a + i * h) for i in range(1, n)) + f(b))
 
+
 def plotFunctions(f1, f2):
     res = numpy.array([rechteckSum(f1, 1 / 10, 10, n) for n in range(1, 50)])
     resAlt = numpy.array([trapezregel(f1, 1 / 10, 10, n) for n in range(1, 50)])
@@ -32,7 +33,6 @@ def plotFunctions(f1, f2):
     matplotlib.pyplot.xlabel("n")
     matplotlib.pyplot.legend(["rechteckSum", "trapezregel"])
     matplotlib.pyplot.show()
-
 
 
 f1 = lambda x: 1 / (x ** 2)
