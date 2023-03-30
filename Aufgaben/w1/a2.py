@@ -11,7 +11,7 @@ def expAlt(x, n):
     return sum(math.pow(x, n - k) / math.factorial(n - k) for k in range(n + 1))
 
 
-for x in [1, 2, 5, 25]:
+for x in [1, 2, 5, 20]:
     res = numpy.array([exp(x, n) for n in range(1, 40)])
     resAlt = numpy.array([expAlt(x, n) for n in range(1, 40)])
 
