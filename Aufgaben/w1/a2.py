@@ -17,7 +17,7 @@ for x in [1, 2, 5, 20]:
 
     matplotlib.pyplot.plot(range(1, 40), res, label="exp", linewidth=4, color='r')
     matplotlib.pyplot.plot(range(1, 40), resAlt, label="expAlt", color='blue')
-    matplotlib.pyplot.ylabel("f(x)")
+    matplotlib.pyplot.ylabel(f"f({x})")
     matplotlib.pyplot.xlabel("n")
     matplotlib.pyplot.legend(["exp", "expAlt"])
     matplotlib.pyplot.show()
