@@ -17,8 +17,8 @@ def anz_schritte(x, x0):
     eps = 0.005
     i = 0
     while True:
-        diff = math.fabs(exact - y_k(i, x, x0))
         i += 1
+        diff = abs(exact - y_k(i, x, x0))
         if diff < eps:
             break
     return i
