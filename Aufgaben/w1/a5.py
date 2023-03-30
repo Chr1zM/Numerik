@@ -1,24 +1,24 @@
 import math
 
-import numpy
-import sys
-sys.setrecursionlimit(10**7)
+
+def a_k(k, x, x0):
+    if k == 0:
+        return math.sqrt(x0)
+    return (3 / (2 * k) - 1) * (x / x0 - 1) * a_k(k - 1, x, x0)
 
 
-def sqrtAbleitung(i, ai, x, x0):
-    if i == 0:
-        return ai
-    else:
-        ai = (3 / (2 * i) - 1) * (x / x0 - 1) * sqrtAbleitung(i, ai-1, x, x0)
-        return sqrtAbleitung(i - 1, ai, x, x0) + ai
+def y_k(k, x, x0):
+    if k == 0:
+        return math.sqrt(x0)
+    return y_k(k - 1, x, x0) + a_k(k, x, x0)
 
 
-def anzSchritte(ai, x, x0):
-    eps = 0.05
-    i = 10
+def anzSchritte(x, x0):
+    eps = 0.005
+    i = 0
     while True:
-        diff = math.fabs(exact - sqrtAbleitung(i, ai, x, x0))
-        i = i + 1
+        diff = math.fabs(exact - y_k(i, x, x0))
+        i += 1
         if diff < eps:
             break
     return i
@@ -26,11 +26,12 @@ def anzSchritte(ai, x, x0):
 
 x = 2
 exact = math.sqrt(x)
-res1 = sqrtAbleitung(10, 1, x, 1)
-res2 = sqrtAbleitung(10, 2, x, 4)
+res1 = y_k(100, x, 1)
+res2 = y_k(100, x, 4)
 
-print("Wurzelannäherung mit i=500, ai=1, x=2 und x_0=1: \n" + str(res1))
-print("Wurzelannäherung mit i=500, ai=1, x=2 und x_0=4: \n" + str(res2))
+print("exact=" + str(exact))
+print("Wurzelannäherung mit i=500, ai=1, x=2 und x_0=1: " + str(res1))
+print("Wurzelannäherung mit i=500, ai=1, x=2 und x_0=4: " + str(res2))
 
-#print("5a.2: mit ai=1, x=2 und x_0=1:" + str(anzSchritte(1, x, 1)) + " Schritte werden benötigt.")
-print("5a.2: mit ai=1, x=2 und x_0=1:" + str(anzSchritte(1, x, 4)) + " Schritte werden benötigt.")
+print("5a.2: mit ai=1, x=2 und x_0=1: " + str(anzSchritte(x, 1)) + " Schritte werden benötigt.")
+print("5a.2: mit ai=1, x=2 und x_0=1: " + str(anzSchritte(x, 4)) + " Schritte werden benötigt.")
