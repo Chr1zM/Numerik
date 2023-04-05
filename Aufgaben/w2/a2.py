@@ -50,19 +50,23 @@ if __name__ == '__main__':
         [2, 1, 2, 0],
         [8, 8, 0, 0],
         [4, 6, 2, 4]])
+    print("A:")
     print(A)
     LU, p = zerlegung(A)
+    print("LU:")
     print(LU)
     print(p)
-    A = np.array([
+    # matrix 2
+    B = np.array([
         [1, 3, 0, 1],
         [0, 1, 1, 2],
         [2, 1, -3, 0],
         [1, 7, 4, 1]])
     # b = [3, 5, 4, 5]
     print("-------")
-    print(A)
-    LU, p = zerlegung(A)
-    print(LU)
+    print("B:")
+    print(B)
+    LU2, p = zerlegung(A)
+    print("LU:")
+    print(LU2)
     print(p)
-    # p = zerlegung(A)[1]
