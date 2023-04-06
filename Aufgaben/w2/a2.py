@@ -35,12 +35,12 @@ def permutation(p_, b_):
     return c_
 
 
-def rueckwaerts(LU, y):
-    return LU, y
-
-
 def vorwaerts(LU, c):
     return LU, c
+
+
+def rueckwaerts(LU, y):
+    return LU, y
 
 
 if __name__ == '__main__':
