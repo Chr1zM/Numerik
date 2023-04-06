@@ -56,7 +56,14 @@ if __name__ == '__main__':
     LU, p = zerlegung(A)
     print("LU:")
     print(LU)
+    print("b:")
+    print(b)
+    print("p:")
     print(p)
+    print("c:")
+    c = permutation(p, b)
+    print(c)
+    print("")
 
     # von a1
     print("A1a:")
