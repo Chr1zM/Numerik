@@ -1,3 +1,4 @@
+import numpy
 import numpy as np
 
 
@@ -24,46 +25,57 @@ def zerlegung(A):
     return matrix_, p_
 
 
-def permutation(p, b):
-    return p, b
+def permutation(p_, b_):
+    n = len(b_)
+    c_ = numpy.copy(b_)
+    for i in range(1, n):
+        if p_[i - 1] != i:
+            c_[[p_[i - 1] - 1, i - 1]] = c_[[i - 1, p_[i - 1] - 1]]
 
-
-def vorwaerts(LU, c):
-    return LU, c
+    return c_
 
 
 def rueckwaerts(LU, y):
     return LU, y
 
 
+def vorwaerts(LU, c):
+    return LU, c
+
+
 if __name__ == '__main__':
-    # A = np.array([
-    # [0, 0, 0, 1],
-    # [2, 1, 2, 0],
-    # [4, 4, 0, 0],
-    # [2, 3, 1, 0]])
     A = np.array([
-        [0, 0, 3, 1],
+        [0, 0, 0, 1],
         [2, 1, 2, 0],
-        [8, 8, 0, 0],
-        [4, 6, 2, 4]])
+        [4, 4, 0, 0],
+        [2, 3, 1, 0]])
+    b = np.array([3, 5, 4, 5])
+    b_strich = np.array([4, 10, 12, 11])
     print("A:")
     print(A)
     LU, p = zerlegung(A)
     print("LU:")
     print(LU)
     print(p)
-    # matrix 2
-    B = np.array([
-        [1, 3, 0, 1],
-        [0, 1, 1, 2],
-        [2, 1, -3, 0],
-        [1, 7, 4, 1]])
-    # b = [3, 5, 4, 5]
-    print("-------")
-    print("B:")
-    print(B)
-    LU2, p = zerlegung(B)
+
+    # von a1
+    print("A1a:")
+    A = np.array([
+        [0, 1, 3, 1],
+        [1, 1, 2, 0],
+        [4, 4, 8, 2],
+        [2, 6, 4, 8]])
+    b = np.array([5, 1, 8, 18])
+    print("A:")
+    print(A)
+    LU, p = zerlegung(A)
     print("LU:")
-    print(LU2)
+    print(LU)
+    print("b:")
+    print(b)
+    print("p:")
     print(p)
+    print("c:")
+    c = permutation(p, b)
+    print(c)
+    print("")
