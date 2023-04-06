@@ -1,4 +1,3 @@
-import numpy
 import numpy as np
 
 
@@ -27,7 +26,7 @@ def zerlegung(A):
 
 def permutation(p_, b_):
     n = len(b_)
-    c_ = numpy.copy(b_)
+    c_ = np.copy(b_)
     for i in range(1, n):
         if p_[i - 1] != i:
             c_[[p_[i - 1] - 1, i - 1]] = c_[[i - 1, p_[i - 1] - 1]]
