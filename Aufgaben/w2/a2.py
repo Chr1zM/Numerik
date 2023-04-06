@@ -1,8 +1,8 @@
 import numpy as np
 
 
-def zerlegung(A):
-    matrix_ = np.array(A)
+def zerlegung(a_):
+    matrix_ = np.array(a_)
     n = len(matrix_)
     p_ = []
 
@@ -30,58 +30,108 @@ def permutation(p_, b_):
     for i in range(1, n):
         if p_[i - 1] != i:
             c_[[p_[i - 1] - 1, i - 1]] = c_[[i - 1, p_[i - 1] - 1]]
-
     return c_
 
 
-def vorwaerts(LU, c):
-    return LU, c
+def vorwaerts(LU_, c_):
+    n = len(LU_)
+    y_ = np.zeros(n)
+    y_[0] = c[0]
+    for i in range(1, n):
+        y_[i] = c_[i] - (sum(LU[i][j] * y_[j] for j in range(i)))
+    return y_
 
 
-def rueckwaerts(LU, y):
-    return LU, y
+def rueckwaerts(LU_, y_):
+    n = len(LU_)
+    x_ = np.zeros(n)
+    x_[n - 1] = y_[n - 1] / LU_[n - 1][n - 1]
+    for i in range(n - 2, -1, -1):
+        x_[i] = (y_[i] - (sum(LU[i][j] * x_[j] for j in range(n - 1, i, -1)))) / LU_[i][i]
+    return x_
 
 
 if __name__ == '__main__':
-    A = np.array([
-        [0, 0, 0, 1],
-        [2, 1, 2, 0],
-        [4, 4, 0, 0],
-        [2, 3, 1, 0]])
-    b = np.array([3, 5, 4, 5])
-    b_strich = np.array([4, 10, 12, 11])
-    print("A:")
-    print(A)
-    LU, p = zerlegung(A)
-    print("LU:")
-    print(LU)
-    print("b:")
-    print(b)
-    print("p:")
-    print(p)
-    print("c:")
-    c = permutation(p, b)
-    print(c)
-    print("")
-
     # von a1
-    print("A1a:")
+    print("A1a für b:")
     A = np.array([
         [0, 1, 3, 1],
         [1, 1, 2, 0],
         [4, 4, 8, 2],
         [2, 6, 4, 8]])
     b = np.array([5, 1, 8, 18])
-    print("A:")
-    print(A)
     LU, p = zerlegung(A)
-    print("LU:")
-    print(LU)
-    print("b:")
-    print(b)
-    print("p:")
-    print(p)
-    print("c:")
     c = permutation(p, b)
-    print(c)
-    print("")
+    y = vorwaerts(LU, c)
+    x = rueckwaerts(LU, y)
+    print(f"{A=}")
+    print(f"{LU=}")
+    print(f"{b=}")
+    print(f"{p=}")
+    print(f"{c=}")
+    print(f"{y=}")
+    print(f"{x=}")
+    print("A1b für b':")
+    b_strich = np.array([5, 7, 28, 22])
+    LU, p = zerlegung(A)
+    c = permutation(p, b_strich)
+    y = vorwaerts(LU, c)
+    x = rueckwaerts(LU, y)
+    print(f"{A=}")
+    print(f"{LU=}")
+    print(f"{b_strich=}")
+    print(f"{p=}")
+    print(f"{c=}")
+    print(f"{y=}")
+    print(f"{x=}")
+
+
+    # von a2.1
+    A = np.array([
+        [0, 0, 0, 1],
+        [2, 1, 2, 0],
+        [4, 4, 0, 0],
+        [2, 3, 1, 0]])
+    b = np.array([3, 5, 4, 5])
+    # für b lösen
+    print("A2 Lösen für b:")
+    LU, p = zerlegung(A)
+    c = permutation(p, b)
+    y = vorwaerts(LU, c)
+    x = rueckwaerts(LU, c)
+    print(f"{A=}")
+    print(f"{LU=}")
+    print(f"{b=}")
+    print(f"{p=}")
+    print(f"{c=}")
+    print(f"{y=}")
+    print(f"{x=}")
+    # für b' lösen
+    print("A2 Lösen für b':")
+    b_strich = np.array([4, 10, 12, 11])
+    LU, p = zerlegung(A)
+    c = permutation(p, b_strich)
+    y = vorwaerts(LU, c)
+    x = rueckwaerts(LU, c)
+    print(f"{A=}")
+    print(f"{LU=}")
+    print(f"{b_strich=}")
+    print(f"{p=}")
+    print(f"{c=}")
+    print(f"{y=}")
+    print(f"{x=}")
+
+    # von a2.2
+    #TODO A, b bestimmen
+
+    # LU, p = zerlegung(A)
+    # c = permutation(p, b)
+    # y = vorwaerts(LU, c)
+    # x = rueckwaerts(LU, c)
+    # print(f"{A=}")
+    # print(f"{LU=}")
+    # print(f"{b=}")
+    # print(f"{p=}")
+    # print(f"{c=}")
+    # print(f"{y=}")
+    # print(f"{x=}")
