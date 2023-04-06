@@ -1,7 +1,8 @@
 import numpy as np
 
 
-def zerlegung(matrix_):
+def zerlegung(A):
+    matrix_ = np.array(A)
     n = len(matrix_)
     p_ = []
 
@@ -9,13 +10,9 @@ def zerlegung(matrix_):
         if matrix_[i][i] != 0:
             p_.append(i + 1)
         else:
-            print("special case")
             for j in range(i + 1, n):
                 if matrix_[j][i] != 0:  # nächste nicht null zeile finden und tauschen
-                    for k in range(i, n):
-                        temp = matrix_[i][k]
-                        matrix_[i][k] = matrix_[j][k]
-                        matrix_[j][k] = temp
+                    matrix_[[i, j]] = matrix_[[j, i]]
                     p_.append(j + 1)
                     break
 
@@ -28,15 +25,15 @@ def zerlegung(matrix_):
 
 
 def permutation(p, b):
-    return
+    return p, b
 
 
 def vorwaerts(LU, c):
-    return
+    return LU, c
 
 
 def rueckwaerts(LU, y):
-    return
+    return LU, y
 
 
 if __name__ == '__main__':
@@ -69,4 +66,6 @@ if __name__ == '__main__':
     LU2, p = zerlegung(A)
     print("LU:")
     print(LU2)
+    print(LU2[[0, 1]])
+    print(LU2[[1, 0]])
     print(p)
