@@ -84,8 +84,7 @@ if __name__ == '__main__':
     print(f"{c=}")
     print(f"{y=}")
     print(f"{x=}")
-
-
+    print("------------------------------------------------------------------------------------")
     # von a2.1
     A = np.array([
         [0, 0, 0, 1],
@@ -98,7 +97,7 @@ if __name__ == '__main__':
     LU, p = zerlegung(A)
     c = permutation(p, b)
     y = vorwaerts(LU, c)
-    x = rueckwaerts(LU, c)
+    x = rueckwaerts(LU, y)
     print(f"{A=}")
     print(f"{LU=}")
     print(f"{b=}")
@@ -112,7 +111,7 @@ if __name__ == '__main__':
     LU, p = zerlegung(A)
     c = permutation(p, b_strich)
     y = vorwaerts(LU, c)
-    x = rueckwaerts(LU, c)
+    x = rueckwaerts(LU, y)
     print(f"{A=}")
     print(f"{LU=}")
     print(f"{b_strich=}")
@@ -120,18 +119,16 @@ if __name__ == '__main__':
     print(f"{c=}")
     print(f"{y=}")
     print(f"{x=}")
-
+    print("------------------------------------------------------------------------------------")
     # von a2.2
-    #TODO A, b bestimmen
+    print("Routine wird für das weitere System für n = 10, 20, 100 angewendet")
+    for n in [10, 20, 100]:
+        A = np.array([1 / (i+j-1) for i in range(1, n+1) for j in range(1, n+1)]).reshape(n, n)
+        b = np.array([1 / (i+1) for i in range(1, n+1)])
+        LU, p = zerlegung(A)
+        c = permutation(p, b)
+        y = vorwaerts(LU, c)
+        x = rueckwaerts(LU, y)
+        print(f"{n=} => {x=}")
 
-    # LU, p = zerlegung(A)
-    # c = permutation(p, b)
-    # y = vorwaerts(LU, c)
-    # x = rueckwaerts(LU, c)
-    # print(f"{A=}")
-    # print(f"{LU=}")
-    # print(f"{b=}")
-    # print(f"{p=}")
-    # print(f"{c=}")
-    # print(f"{y=}")
-    # print(f"{x=}")
+    print("daraus kann man sich erschließen, dass für größere n eine größere Ungenauigkeit folgt.")
