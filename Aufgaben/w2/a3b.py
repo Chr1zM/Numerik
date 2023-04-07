@@ -35,12 +35,8 @@ if __name__ == '__main__':
             np.full(n - 1, -1, dtype=float), -1)
 
         main_diag, sub_diag = cholesky(A)
-
         b = np.full(n, (-1) / (n + 1) ** 2, dtype=float)
-
         L = np.diag(main_diag) + np.diag(sub_diag, -1)
-
         y = vorwaerts(L, b)  # Ly = b
-
         x = rueckwaerts(L.T, y)  # L^T x = y
         print(f"{n=}: {x.T=}")
