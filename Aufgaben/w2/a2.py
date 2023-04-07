@@ -38,7 +38,7 @@ def vorwaerts(LU_, c_):
     y_ = np.zeros(n)
     y_[0] = c_[0]
     for i in range(1, n):
-        y_[i] = c_[i] - (sum(LU[i][j] * y_[j] for j in range(i)))
+        y_[i] = c_[i] - (sum(LU_[i][j] * y_[j] for j in range(i)))
     return y_
 
 
@@ -47,7 +47,7 @@ def rueckwaerts(LU_, y_):
     x_ = np.zeros(n)
     x_[n - 1] = y_[n - 1] / LU_[n - 1][n - 1]
     for i in range(n - 2, -1, -1):
-        x_[i] = (y_[i] - (sum(LU[i][j] * x_[j] for j in range(n - 1, i, -1)))) / LU_[i][i]
+        x_[i] = (y_[i] - (sum(LU_[i][j] * x_[j] for j in range(n - 1, i, -1)))) / LU_[i][i]
     return x_
 
 
@@ -99,3 +99,21 @@ if __name__ == '__main__':
         print(f"{n=} => {x=}")
 
     print("daraus kann man sich erschließen, dass für größere n eine größere Ungenauigkeit folgt.")
+
+    a_ij = lambda i, j: 1 / ((i + 1) + (j + 1) - 1)
+    b_i = lambda i: 1 / (i + 1)
+
+    for n in [10, 20, 100]:
+        sol = np.zeros(n)
+        sol[1] = 1
+
+        a_mat = np.fromfunction(a_ij, (n, n), dtype=float)
+        b_vec = np.array([b_i(i) for i in range(1, n + 1)], dtype=float)
+
+        lu_sol, p_sol = zerlegung(a_mat)
+        c_sol = permutation(p_sol, b_vec)
+        y_sol = vorwaerts(lu_sol, c_sol)
+        x_sol = rueckwaerts(lu_sol, y_sol)
+
+        len_sol = np.linalg.norm(sol - x_sol, ord=1)
+        print(f"For {n} with an distance of {len_sol} to the real solution")
