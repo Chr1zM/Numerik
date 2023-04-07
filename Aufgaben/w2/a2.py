@@ -52,39 +52,6 @@ def rueckwaerts(LU_, y_):
 
 
 if __name__ == '__main__':
-    # von a1
-    print("A1a für b:")
-    A = np.array([
-        [0, 1, 3, 1],
-        [1, 1, 2, 0],
-        [4, 4, 8, 2],
-        [2, 6, 4, 8]])
-    b = np.array([5, 1, 8, 18])
-    LU, p = zerlegung(A)
-    c = permutation(p, b)
-    y = vorwaerts(LU, c)
-    x = rueckwaerts(LU, y)
-    print(f"{A=}")
-    print(f"{LU=}")
-    print(f"{b=}")
-    print(f"{p=}")
-    print(f"{c=}")
-    print(f"{y=}")
-    print(f"{x=}")
-    print("A1b für b':")
-    b_strich = np.array([5, 7, 28, 22])
-    LU, p = zerlegung(A)
-    c = permutation(p, b_strich)
-    y = vorwaerts(LU, c)
-    x = rueckwaerts(LU, y)
-    print(f"{A=}")
-    print(f"{LU=}")
-    print(f"{b_strich=}")
-    print(f"{p=}")
-    print(f"{c=}")
-    print(f"{y=}")
-    print(f"{x=}")
-    print("------------------------------------------------------------------------------------")
     # von a2.1
     A = np.array([
         [0, 0, 0, 1],
