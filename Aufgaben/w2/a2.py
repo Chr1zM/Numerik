@@ -123,8 +123,8 @@ if __name__ == '__main__':
     # von a2.2
     print("Routine wird für das weitere System für n = 10, 20, 100 angewendet")
     for n in [10, 20, 100]:
-        A = np.array([1 / (i + j - 1) for i in range(1, n + 1) for j in range(1, n + 1)]).reshape(n, n)
-        b = np.array([1 / (i + 1) for i in range(1, n + 1)])
+        A = np.array([1 / (i + j - 1) for i in range(1, n + 1) for j in range(1, n + 1)], dtype=float).reshape(n, n)
+        b = np.array([1 / (i + 1) for i in range(1, n + 1)], dtype=float)
         LU, p = zerlegung(A)
         c = permutation(p, b)
         y = vorwaerts(LU, c)
