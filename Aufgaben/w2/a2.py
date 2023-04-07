@@ -36,7 +36,7 @@ def permutation(p_, b_):
 def vorwaerts(LU_, c_):
     n = len(LU_)
     y_ = np.zeros(n)
-    y_[0] = c[0]
+    y_[0] = c_[0]
     for i in range(1, n):
         y_[i] = c_[i] - (sum(LU[i][j] * y_[j] for j in range(i)))
     return y_
