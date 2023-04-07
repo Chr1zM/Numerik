@@ -99,21 +99,3 @@ if __name__ == '__main__':
         print(f"{n=} => {x=}")
 
     print("daraus kann man sich erschließen, dass für größere n eine größere Ungenauigkeit folgt.")
-
-    a_ij = lambda i, j: 1 / ((i + 1) + (j + 1) - 1)
-    b_i = lambda i: 1 / (i + 1)
-
-    for n in [10, 20, 100]:
-        sol = np.zeros(n)
-        sol[1] = 1
-
-        a_mat = np.fromfunction(a_ij, (n, n), dtype=float)
-        b_vec = np.array([b_i(i) for i in range(1, n + 1)], dtype=float)
-
-        lu_sol, p_sol = zerlegung(a_mat)
-        c_sol = permutation(p_sol, b_vec)
-        y_sol = vorwaerts(lu_sol, c_sol)
-        x_sol = rueckwaerts(lu_sol, y_sol)
-
-        len_sol = np.linalg.norm(sol - x_sol, ord=1)
-        print(f"For {n} with an distance of {len_sol} to the real solution")
