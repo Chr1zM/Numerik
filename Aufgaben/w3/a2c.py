@@ -51,18 +51,20 @@ def rueckwaerts(LU_, y_):
     return x_
 
 
-def sherman_morrison(A, b, u, v):
-    LU, p = zerlegung(A)
-    u_perm = permutation(p, u)
+def sherman_morrison(A_, b_, u_, v_):
+    # LU zerlegung
+    LU, p = zerlegung(A_)
+    u_perm = permutation(p, u_)
     y = vorwaerts(LU, u_perm)
     z = rueckwaerts(LU, y)
-    if (1 + v.T @ z) == 0:
+
+    if (1 + v_.T @ z) == 0:
         raise ArithmeticError('1 + v^T z = 0')
-    alpha = 1 / (1 + v.T @ z)
-    b_perm = permutation(p, b)
+    alpha = 1 / (1 + v_.T @ z)
+    b_perm = permutation(p, b_)
     y_hat = vorwaerts(LU, b_perm)
     z_hat = rueckwaerts(LU, y_hat)
-    x_hat = z_hat - alpha * (v.T @ z_hat) * z
+    x_hat = z_hat - alpha * (v_.T @ z_hat) * z
     return x_hat
 
 
