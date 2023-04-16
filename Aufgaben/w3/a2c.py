@@ -59,7 +59,7 @@ def sherman_morrison(A_, b_, u_, v_):
     z = rueckwaerts(LU, y)
 
     if (1 + v_.T @ z) == 0:
-        raise ArithmeticError('1 + v^T z = 0')
+        print("Error")
     alpha = 1 / (1 + v_.T @ z)
     b_perm = permutation(p, b_)
     y_hat = vorwaerts(LU, b_perm)
