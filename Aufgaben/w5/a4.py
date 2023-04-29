@@ -41,3 +41,10 @@ if __name__ == '__main__':
         x = solve(Q, R, b)
         print(f"{x}\n")
         print("-" * 50)
+
+    a = np.array([
+        [5, 7, -17],
+        [10, -1, -19],
+        [10, 20, 5],
+    ])
+    q, r = householder(a)
