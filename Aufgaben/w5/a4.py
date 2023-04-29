@@ -45,6 +45,7 @@ if __name__ == '__main__':
     a = np.array([
         [5, 7, -17],
         [10, -1, -19],
-        [10, 20, 5],
-    ])
+        [10, 20, 5]])
     q, r = householder(a)
+    print(q)
+    print(r)
