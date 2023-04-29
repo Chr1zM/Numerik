@@ -23,7 +23,7 @@ def solve(Q, R, b):
     x[n - 1] /= R[n - 1, n - 1]
     for i in range(n - 2, -1, -1):
         x[i] -= x[i + 1:] @ R[i, i + 1:]
-        x[i] = x[i] / R[i, i]
+        x[i] /= R[i, i]
     return x
 
 
@@ -40,4 +40,4 @@ if __name__ == '__main__':
         # Result
         x = solve(Q, R, b)
         print(f"{x}\n")
-        print("-" * 100)
+        print("-" * 50)
