@@ -57,12 +57,14 @@ def rueckwaerts(LU_, y_):
         x_[i] = (y_[i] - (sum(LU_[i][j] * x_[j] for j in range(n - 1, i, -1)))) / LU_[i][i]
     return x_
 
+
 # Ab hier neuer Code (Nachiteration Umsetzung)
 def solve_pk(LU_, p_, rk_):
     c = permutation(p_, rk_)
     y = vorwaerts(LU_, c)
     pk = rueckwaerts(LU_, y)
     return pk
+
 
 def nachiteration(x_, LU_, p_, a_, b_, eps):
     m = np.copy(LU_)
