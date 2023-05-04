@@ -57,16 +57,19 @@ def rueckwaerts(LU_, y_):
         x_[i] = (y_[i] - (sum(LU_[i][j] * x_[j] for j in range(n - 1, i, -1)))) / LU_[i][i]
     return x_
 
+
 def nachiteration(x_, eps):
     # TODO
+    x = x_
     return x
+
 
 if __name__ == '__main__':
     print("a:")
     for n in (50, 70, 100):
         a = np.zeros((n,)) + np.eye(n) + np.tril(np.full((n, n), -1), -1)
         a[:, -1] = 1
-        b = np.arange(2, 3 - n, -1, dtype=np.float)
+        b = np.arange(2, 3 - n, -1, dtype=np.float64)
         b = np.r_[b, 2 - n]
         print(a)
         # solve
@@ -74,12 +77,22 @@ if __name__ == '__main__':
         b_perm = permutation(p, b)
         y = vorwaerts(LU, b_perm)
         x_ = rueckwaerts(LU, y)
-        x = nachiteration(x_, eps=1e-10)
+        x = nachiteration(x_, 1e-10)
         print(f"mit {n} nachiterationen:")
         print(x)
 
-
     print("b:")
-    # TODO
-
-
+    for n in (5, 10, 15):
+        a = np.zeros((n, n), dtype=np.float64)
+        for i in range(n):
+            for j in range(n):
+                a[i, j] = 0 if j > i else (1 if j == i else i + j)
+        # print(a)
+        b = np.array([1] + [0] * (n - 1), dtype=np.float64)
+        LU, p = zerlegung(a, True)
+        b_perm = permutation(p, b)
+        y = vorwaerts(LU, b_perm)
+        x_ = rueckwaerts(LU, y)
+        x = nachiteration(x_, 1e-10)
+        print(f"mit {n} nachiterationen:")
+        print(x)
