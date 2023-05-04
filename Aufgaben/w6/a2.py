@@ -58,7 +58,6 @@ def rueckwaerts(LU_, y_):
     return x_
 
 
-# Ab hier neuer Code (Nachiteration Umsetzung)
 def solve_pk(LU_, p_, rk_):
     c = permutation(p_, rk_)
     y = vorwaerts(LU_, c)
