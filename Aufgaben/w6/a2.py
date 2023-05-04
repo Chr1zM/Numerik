@@ -57,11 +57,25 @@ def rueckwaerts(LU_, y_):
         x_[i] = (y_[i] - (sum(LU_[i][j] * x_[j] for j in range(n - 1, i, -1)))) / LU_[i][i]
     return x_
 
+# Ab hier neuer Code (Nachiteration Umsetzung)
+def solve_pk(LU_, p_, rk_):
+    c = permutation(p_, rk_)
+    y = vorwaerts(LU_, c)
+    pk = rueckwaerts(LU_, y)
+    return pk
 
-def nachiteration(x_, eps):
-    # TODO
+def nachiteration(x_, LU_, p_, a_, b_, eps):
+    m = np.copy(LU_)
+    p = np.copy(p_)
     x = x_
-    return x
+    k = 0
+    while True:
+        k += 1
+        rk = np.subtract(b_, a_ @ x)
+        pk = solve_pk(m, p, rk)
+        x += pk
+        if (np.linalg.norm(pk) / np.linalg.norm(x)) < eps:
+            return x
 
 
 if __name__ == '__main__':
@@ -77,9 +91,9 @@ if __name__ == '__main__':
         b_perm = permutation(p, b)
         y = vorwaerts(LU, b_perm)
         x_ = rueckwaerts(LU, y)
-        x = nachiteration(x_, 1e-10)
+        x = nachiteration(x_, LU, p, a, b, 1e-10)
         print(f"mit {n} nachiterationen:")
-        print(x)
+        print(f"x={x}")
 
     print("b:")
     for n in (5, 10, 15):
@@ -93,6 +107,6 @@ if __name__ == '__main__':
         b_perm = permutation(p, b)
         y = vorwaerts(LU, b_perm)
         x_ = rueckwaerts(LU, y)
-        x = nachiteration(x_, 1e-10)
+        x = nachiteration(x_, LU, p, a, b, 1e-10)
         print(f"mit {n} nachiterationen:")
-        print(x)
+        print(f"x={x}")
