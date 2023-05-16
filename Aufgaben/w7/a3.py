@@ -61,7 +61,7 @@ if __name__ == '__main__':
     ew_ex = ew_exakt(m)
 
     # compare eigenvalues
-    plt.semilogy(ew_jac[::-1], 'r.', label='Jacobi')
-    plt.semilogy(ew_ex, 'b.', label='Exakt')
+    plt.semilogy(ew_jac[::-1], 'b.', label='Jacobi')
+    plt.semilogy(ew_ex, 'y.', label='Exakt')
     plt.legend()
     plt.show()
