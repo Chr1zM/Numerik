@@ -25,8 +25,7 @@ def extrapolation(f_, a_, b_, sizes_):
 
 
 def romberg(f_, a_, b_, q_):
-    ls = np.array([2 ** i for i in range(q_ + 1)], dtype=np.int)
-    return extrapolation(f_, a_, b_, ls)
+    return extrapolation(f_, a_, b_, np.array([2 ** i for i in range(q_ + 1)], dtype=int))
 
 
 def bulirsch(f_, a_, b_, q_):
@@ -42,9 +41,7 @@ def bulirsch(f_, a_, b_, q_):
     return extrapolation(f_, a_, b_, ls)
 
 
-def f(x_):
-    return math.sin(math.pi * x_ ** 2)
-
+f = lambda x: math.sin(math.pi * x ** 2)
 
 if __name__ == '__main__':
     exact_val = quad(f, -1, 1)[0]
