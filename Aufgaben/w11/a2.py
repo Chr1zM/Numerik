@@ -48,6 +48,6 @@ if __name__ == '__main__':
 
     for order in (2, 4, 6, 8, 10, 12, 14, 16):
         q = order // 2
-        print(f"order: {order}")
+        print(f"Ordnung: {order}")
         print(f"romberg: {romberg(f, -1, 1, q)} error: {abs(exact_val - romberg(f, -1, 1, q))}")
         print(f"bulirsch: {bulirsch(f, -1, 1, q)} error: {abs(exact_val - bulirsch(f, -1, 1, q))}")
